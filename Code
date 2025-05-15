@@ -1,0 +1,107 @@
+def create_student_profile():
+    print("\n" + "="*15 + " STUDENT REGISTRATION " + "="*15)
+    student = {
+        "first_name": input("Enter your first name: "),
+        "age": int(input("Enter your age: ")),
+        "QUIZ_SCORE": "Not Yet"  
+    }
+    return student
+
+class QuizMaster:
+    def __init__(self):
+        self.questions = [
+            {
+                "prompt": "What analyzes source code and breaks it into tokens?",
+                "answer": "Lexical Analyzer",
+                "hint": "Think of the first phase of compilation"
+            },
+            {
+                "prompt": "Named memory location that holds changeable data?",
+                "answer": "Variable",
+                "hint": "Starts with 'V'"
+            },
+            {
+                "prompt": "Process of analyzing syntax against grammar rules?",
+                "answer": "Parsing",
+                "hint": "What compilers do after lexical analysis"
+            },
+            {
+                "prompt": "Naming convention like 'ClassName'?",
+                "answer": "Pascal Case",
+                "hint": "Also called Upper Camel Case"
+            },
+            {
+                "prompt": "Grammar describing language strings?",
+                "answer": "Context-Free Grammar",
+                "hint": "Used in compiler design"
+            },
+            {
+                "prompt": "Words that can't be identifiers?",
+                "answer": "Reserved Words",
+                "hint": "Like 'if', 'else', 'while'"
+            },
+            {
+                "prompt": "Data type for character sequences?",
+                "answer": "Strings",
+                "hint": "What you're using right now"
+            },
+            {
+                "prompt": "Variable-value association?",
+                "answer": "Binding",
+                "hint": "What happens during assignment"
+            },
+            {
+                "prompt": "Converting code to tokens?",
+                "answer": "Tokenization",
+                "hint": "First step in lexical analysis"
+            },
+            {
+                "prompt": "Identifier for programming entities?",
+                "answer": "Name",
+                "hint": "How we reference things"
+            }
+        ]
+        self.score = 0
+
+    def run_quiz(self):
+        print("\n" + "="*15 + " PROGRAMMING QUIZ " + "="*15)
+        for i, q in enumerate(self.questions, 1):
+            print(f"\nQ{i}: {q['prompt']}")
+            answer = input("Your answer: ")
+            if answer.lower() == q['answer'].lower():
+                print("✓ Correct!")
+                self.score += 1
+            else:
+                print(f"✗ Incorrect. Hint: {q['hint']}")
+        return self.score
+
+    def show_answer_key(self):
+        print("\n" + "="*15 + " ANSWER KEY " + "="*15)
+        for i, q in enumerate(self.questions, 1):
+            print(f"Q{i}: {q['answer']}")
+
+if __name__ == "__main__":
+    student = create_student_profile()
+    print("\n" + "="*15 + " STUDENT PROFILE " + "="*15)
+    print(f"Name: {student['first_name']}")
+    print(f"Age: {student['age']}")
+    print(f"Quiz Score: {student['QUIZ_SCORE']}")
+
+    quiz_status = None  
+    status_map = {
+        True: "PASSED with honors!",
+        False: "Failed - try again!",
+        None: "Not yet completed"
+    }
+    print(f"\nCurrent Status: {status_map[quiz_status]}")
+
+    quiz = QuizMaster()
+    final_score = quiz.run_quiz()
+    
+    print("\n" + "="*15 + " QUIZ RESULTS " + "="*15)
+    print(f"You scored {final_score}/{len(quiz.questions)}")
+    
+    if input("\nWould you like to see the answer key? (y/n): ").lower() == 'y':
+        quiz.show_answer_key()
+
+    print("\n" + "="*15 + " END OF PROGRAM " + "="*15)
